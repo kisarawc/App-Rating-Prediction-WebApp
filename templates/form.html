@@ -4,81 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Rating Prediction Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='formstyle.css') }}">
+
 </head>
 <body>
-    <h1>App Rating Prediction</h1>
+
+    <div class="blur-box">
+    <h1 align="center">App Rating Prediction</h1>
     <form action="/predict" method="POST">
-        <label for="size">Size:</label>
-        <input type="text" id="size" name="size" required><br><br>
+        <div class="form-group">
+            <label for="size">Size:</label>
+            <input type="text" class="no-outline" id="size" name="size" required>
+        </div>
 
-        <label for="type">Type:</label>
-        <select id="type" name="type" required>
-            <option value="free">Free</option>
-            <option value="paid">Paid</option>
-        </select><br><br>
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+                <option value="free">Free</option>
+                <option value="paid">Paid</option>
+            </select>
+        </div>
 
-        <label for="update_month">Update Month:</label>
-        <input type="number"  id="update_month" name="update_month" min="1" max="12" required><br><br>
+        <div class="form-group">
+            <label for="update_month">Update Month:</label>
+            <input type="number" class="no-outline" id="update_month" name="update_month" min="1" max="12" required>
+        </div>
 
-        <label for="update_year">Update Year:</label>
-        <input type="number" id="update_year" name="update_year" required><br><br>
+        <div class="form-group">
+            <label for="update_year">Update Year:</label>
+            <input type="number" class="no-outline" id="update_year" name="update_year" required>
+        </div>
 
-        <label for="price">Price:</label>
-        <input type="text" id="price" name="price" step="0.01" required><br><br>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" class="no-outline" id="price" name="price" step="0.01" required>
+        </div>
 
-        <label for="reviews">Reviews:</label>
-        <input type="number" id="reviews" name="reviews" step="0.000000000000001" required><br><br>
+        <div class="form-group">
+            <label for="reviews">Reviews:</label>
+            <input type="number" class="no-outline" id="reviews" name="reviews" step="0.000000000000001" required>
+        </div>
 
-        <label for="installs">Installs:</label>
-        <input type="number" id="installs" name="installs" step="0.000000000000001" required><br><br>
+        <div class="form-group">
+            <label for="installs">Installs:</label>
+            <input type="number" class="no-outline" id="installs" name="installs" step="0.000000000000001" required>
+        </div>
 
-        <label for="category">Category:</label>
-        <select id="category" name="category" required>
-            <option value="ART_AND_DESIGN">Art & Design</option>
-            <option value="AUTO_AND_VEHICLES">Auto & Vehicles</option>
-            <option value="BEAUTY">Beauty</option>
-            <option value="BOOKS_AND_REFERENCE">Books & Reference</option>
-            <option value="BUSINESS">Business</option>
-            <option value="COMICS">Comics</option>
-            <option value="COMMUNICATION">Communication</option>
-            <option value="DATING">Dating</option>
-            <option value="EDUCATION">Education</option>
-            <option value="ENTERTAINMENT">Entertainment</option>
-            <option value="EVENTS">Events</option>
-            <option value="FINANCE">Finance</option>
-            <option value="FOOD_AND_DRINK">Food & Drink</option>
-            <option value="HEALTH_AND_FITNESS">Health & Fitness</option>
-            <option value="HOUSE_AND_HOME">House & Home</option>
-            <option value="LIBRARIES_AND_DEMO">Libraries & Demo</option>
-            <option value="LIFESTYLE">Lifestyle</option>
-            <option value="GAME">Game</option>
-            <option value="FAMILY">Family</option>
-            <option value="MEDICAL">Medical</option>
-            <option value="SOCIAL">Social</option>
-            <option value="SHOPPING">Shopping</option>
-            <option value="PHOTOGRAPHY">Photography</option>
-            <option value="SPORTS">Sports</option>
-            <option value="TRAVEL_AND_LOCAL">Travel & Local</option>
-            <option value="TOOLS">Tools</option>
-            <option value="PERSONALIZATION">Personalization</option>
-            <option value="PRODUCTIVITY">Productivity</option>
-            <option value="PARENTING">Parenting</option>
-            <option value="WEATHER">Weather</option>
-            <option value="VIDEO_PLAYERS">Video Players</option>
-            <option value="NEWS_AND_MAGAZINES">News & Magazines</option>
-            <option value="MAPS_AND_NAVIGATION">Maps & Navigation</option>
-        </select><br><br>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="ART_AND_DESIGN">Art & Design</option>
+                <option value="AUTO_AND_VEHICLES">Auto & Vehicles</option>
+                <option value="BEAUTY">Beauty</option>
+                <option value="BOOKS_AND_REFERENCE">Books & Reference</option>
+                <option value="BUSINESS">Business</option>
+                <option value="COMICS">Comics</option>
+                <option value="COMMUNICATION">Communication</option>
+                <option value="DATING">Dating</option>
+                <option value="EDUCATION">Education</option>
+                <option value="ENTERTAINMENT">Entertainment</option>
+                <option value="EVENTS">Events</option>
+                <option value="FINANCE">Finance</option>
+                <option value="FOOD_AND_DRINK">Food & Drink</option>
+                <option value="HEALTH_AND_FITNESS">Health & Fitness</option>
+                <option value="HOUSE_AND_HOME">House & Home</option>
+                <option value="LIBRARIES_AND_DEMO">Libraries & Demo</option>
+                <option value="LIFESTYLE">Lifestyle</option>
+                <option value="GAME">Game</option>
+                <option value="FAMILY">Family</option>
+                <option value="MEDICAL">Medical</option>
+                <option value="SOCIAL">Social</option>
+                <option value="SHOPPING">Shopping</option>
+                <option value="PHOTOGRAPHY">Photography</option>
+                <option value="SPORTS">Sports</option>
+                <option value="TRAVEL_AND_LOCAL">Travel & Local</option>
+                <option value="TOOLS">Tools</option>
+                <option value="PERSONALIZATION">Personalization</option>
+                <option value="PRODUCTIVITY">Productivity</option>
+                <option value="PARENTING">Parenting</option>
+                <option value="WEATHER">Weather</option>
+                <option value="VIDEO_PLAYERS">Video Players</option>
+                <option value="NEWS_AND_MAGAZINES">News & Magazines</option>
+                <option value="MAPS_AND_NAVIGATION">Maps & Navigation</option>
+            </select>
+        </div>
 
-        <label for="content_rating">Content Rating:</label>
-        <select id="content_rating" name="content_rating" required>
-            <option value="Everyone">Everyone</option>
-            <option value="Teen">Teen</option>
-            <option value="Everyone 10+">Everyone 10+</option>
-            <option value="Mature 17+">Mature 17+</option>
-            <option value="Adults only 18+">Adults only 18+</option>
-        </select><br><br>
+        <div class="form-group">
+            <label for="content_rating">Content Rating:</label>
+            <select id="content_rating" name="content_rating" required>
+                <option value="Everyone">Everyone</option>
+                <option value="Teen">Teen</option>
+                <option value="Everyone 10+">Everyone 10+</option>
+                <option value="Mature 17+">Mature 17+</option>
+                <option value="Adults only 18+">Adults only 18+</option>
+            </select>
+        </div>
+        
 
-        <input type="submit" value="Predict Rating">
+        <input type="submit" class="no-outline" value="Predict Rating">
     </form>
+</div>
 </body>
 </html>

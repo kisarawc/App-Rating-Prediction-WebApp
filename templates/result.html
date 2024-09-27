@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='resultsstyle.css') }}">
+</head>
+<body>
+    <div class="blur-box result-box">
+        <h1 align="center">Prediction Result</h1>
+        <p class="prediction-text" align="center">
+            <span class="prediction-label">The predicted rating for the app is:</span> 
+            <strong>{{ prediction }}</strong>
+        </p>
+        
+        
+        <!-- Add a "Go Back" button -->
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/" class="button">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>
