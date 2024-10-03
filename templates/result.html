@@ -11,11 +11,9 @@
         <h1 align="center">Prediction Result</h1>
         <p class="prediction-text" align="center">
             <span class="prediction-label">The predicted rating for the app is:</span> 
-            <strong>{{ prediction }}</strong>
+            <strong>{{ prediction | round(2) }}</strong>
         </p>
         
-        
-        <!-- Add a "Go Back" button -->
         <div style="text-align: center; margin-top: 20px;">
             <a href="/" class="button">Go Back</a>
         </div>

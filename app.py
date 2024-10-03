@@ -4,11 +4,11 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Load the trained model
-model = joblib.load('app_rating_model.pkl')
+model = joblib.load('best_gb_model.pkl')
+transformer = joblib.load('power_transformer.pkl')
 
 types = {'free': 0, 'paid': 1}
-update_months = {f"{i+1}": i+1 for i in range(12)}  # Assuming months 1-12
+update_months = {f"{i+1}": i+1 for i in range(12)}
 
 @app.route('/')
 def index():
@@ -16,8 +16,8 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Collect form data
-    size = float(request.form['size'])
+    size_MB = float(request.form['size'])
+    size_kb = size_MB * 1024
     type_ = types.get(request.form['type'].lower(), 0)
     update_month = update_months.get(request.form['update_month'], 1)
     update_year = int(request.form['update_year'])
@@ -25,21 +25,25 @@ def predict():
     reviews = float(request.form['reviews'])
     installs = float(request.form['installs'])
 
-    price_log = np.log(price + 1)
-    reviews_log = np.log(reviews + 1)
-    installs_log = np.log(installs + 1)
+    dummy_rating = 0
 
-    # Assume category and content rating are collected in similar ways
+    features_to_transform = np.array([[reviews, installs, price, dummy_rating]])
+    transformed_features_with_dummy = transformer.transform(features_to_transform)
+
+    reviews_transformed = transformed_features_with_dummy[0, 0]
+    installs_transformed = transformed_features_with_dummy[0, 1]
+    price_transformed = transformed_features_with_dummy[0, 2]
+
     category_features = [int(request.form.get(f'Category_{i}', 0)) for i in range(1, 33)]
     content_rating_features = [int(request.form.get(f'Content Rating_{i}', 0)) for i in range(1, 6)]
 
-    features = np.array([[size, type_, update_month, update_year, price_log, reviews_log, installs_log] + category_features + content_rating_features])
+    features = np.array([[size_kb, type_, update_month, update_year, price_transformed, reviews_transformed, installs_transformed] + category_features + content_rating_features])
 
-    # Perform prediction
-    prediction = model.predict(features)[0]
+    prediction_transformed = model.predict(features)[0]
+    inverse_transform_input = np.array([[0, 0, 0, prediction_transformed]])
+    predicted_rating_original = transformer.inverse_transform(inverse_transform_input)[0, 3]
 
-    # Render the result.html template with the prediction result
-    return render_template('result.html', prediction=prediction)
+    return render_template('result.html', prediction=predicted_rating_original)
 
 if __name__ == '__main__':
     app.run(debug=True)
